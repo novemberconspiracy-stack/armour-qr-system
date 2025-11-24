@@ -430,8 +430,8 @@
                         <div class="info-item"><span class="info-label">Finish:</span> ${floor.finish || 'N/A'}</div>
                     </div>
                     <div class="qr-display">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://odinsfountain.com/armour/floor-' + floor.id)}" alt="QR Code">
-                        <p style="margin-top: 10px; font-size: 0.85em; color: #888;">odinsfountain.com/armour/floor-${floor.id}</p>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://novemberconspiracy-stack.github.io/armour-qr-system/floor-' + floor.id)}" alt="QR Code">
+                        <p style="margin-top: 10px; font-size: 0.85em; color: #888;">novemberconspiracy-stack.github.io/armour-qr-system/floor-${floor.id}</p>
                     </div>
                     <div class="btn-group">
                         <button class="btn" onclick="downloadQR('${floor.id}')">⬇️ Download QR</button>
@@ -484,7 +484,7 @@
         }
         
         function downloadQR(floorId) {
-            const url = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent('https://odinsfountain.com/armour/floor-' + floorId)}`;
+            const url = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent('https://novemberconspiracy-stack.github.io/armour-qr-system/floor-' + floorId)}`;
             const link = document.createElement('a');
             link.href = url;
             link.download = `armour-floor-${floorId}-qr.png`;
