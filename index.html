@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armour Wood Floors - QR Floor Registry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #8b7355 0%, #6b5644 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+            color: #d4a574;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #b8956a;
+            font-size: 1.1em;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .tab-btn.active {
+            background: #d4a574;
+            color: #1a0f08;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #2c1810;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d4a574;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        button[type="submit"], .btn {
+            background: #2c1810;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button[type="submit"]:hover, .btn:hover {
+            background: #1a0f08;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .floor-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d4a574;
+        }
+        
+        .floor-card h3 {
+            color: #2c1810;
+            margin-bottom: 15px;
+        }
+        
+        .floor-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            font-size: 0.95em;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .qr-display {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .qr-display img {
+            border: 4px solid #2c1810;
+            border-radius: 8px;
+            max-width: 200px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: #6b5644;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a4736;
+        }
+        
+        .client-preview {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+            padding: 40px;
+            border-radius: 20px;
+        }
+        
+        .preview-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .preview-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .preview-logo {
+            width: 80px;
+            height: 80px;
+            background: #2c1810;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+        }
+        
+        .preview-detail {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .preview-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .preview-label {
+            font-size: 0.85em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .preview-value {
+            font-weight: 600;
+            color: #333;
+            margin-top: 4px;
+        }
+        
+        .cta-box {
+            background: #f0e5d8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .cta-box p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .cta-box a {
+            display: block;
+            background: #2c1810;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ Armour Wood Floors</h1>
+            <p class="subtitle">QR Floor Registry System</p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('create')">➕ Create New Floor</button>
+            <button class="tab-btn" onclick="switchTab('list')">📋 All Floors (<span id="floorCount">1</span>)</button>
+            <button class="tab-btn" onclick="switchTab('preview')">📱 Client View Demo</button>
+        </div>
+        
+        <!-- Create Floor Tab -->
+        <div id="create" class="tab-content active">
+            <h2>Create New Floor Record</h2>
+            <form onsubmit="createFloor(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Client Name *</label>
+                        <input type="text" id="clientName" required placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Wood Type *</label>
+                        <input type="text" id="woodType" required placeholder="Red Oak Hardwood">
+                    </div>
+                    <div class="form-group">
+                        <label>Pattern/Design</label>
+                        <input type="text" id="pattern" placeholder="Herringbone with Walnut Border">
+                    </div>
+                    <div class="form-group">
+                        <label>Install Date</label>
+                        <input type="text" id="installDate" placeholder="November 2025">
+                    </div>
+                    <div class="form-group">
+                        <label>Square Footage</label>
+                        <input type="text" id="squareFeet" placeholder="1,200">
+                    </div>
+                    <div class="form-group">
+                        <label>Finish Type</label>
+                        <input type="text" id="finish" placeholder="Danish Oil, Satin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Care Instructions</label>
+                    <textarea id="care" rows="3" placeholder="Sweep regularly, damp mop monthly, refinish every 7-10 years"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Warranty Information</label>
+                    <input type="text" id="warranty" value="5-year installation warranty" placeholder="5-year installation warranty">
+                </div>
+                <button type="submit">Generate Floor Record & QR Code</button>
+            </form>
+        </div>
+        
+        <!-- List Floors Tab -->
+        <div id="list" class="tab-content">
+            <h2>All Floor Records</h2>
+            <div id="floorsList"></div>
+        </div>
+        
+        <!-- Preview Tab -->
+        <div id="preview" class="tab-content">
+            <h2 style="text-align: center; margin-bottom: 40px;">Client View Demo</h2>
+            <div class="client-preview">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <div class="preview-logo">🏛️</div>
+                        <h3 style="margin: 0 0 5px 0; color: #2c1810;">Armour Wood Floors</h3>
+                        <p style="color: #888; font-size: 0.9em;">Floor Information</p>
+                    </div>
+                    
+                    <div id="previewContent"></div>
+                    
+                    <div class="cta-box">
+                        <p>Need maintenance or refinishing?</p>
+                        <a href="tel:6365777738">📞 Call Dan: 636.577.7738</a>
+                        <p style="margin-top: 15px; font-size: 0.85em; color: #888;">
+                            Installed by Armour Wood Floors<br>Fenton, MO 63026
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let floors = [
+            {
+                id: 'AWF001',
+                clientName: 'John Smith',
+                woodType: 'Red Oak Hardwood',
+                pattern: 'Herringbone with Walnut Border',
+                installDate: 'November 2025',
+                squareFeet: '1,200',
+                finish: 'Danish Oil, Satin',
+                care: 'Sweep regularly, damp mop monthly, refinish every 7-10 years',
+                warranty: '5-year installation warranty'
+            }
+        ];
+        
+        let selectedFloor = floors[0];
+        
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'list') renderFloorsList();
+            if (tabName === 'preview') renderPreview();
+        }
+        
+        function createFloor(e) {
+            e.preventDefault();
+            const newFloor = {
+                id: `AWF${String(floors.length + 1).padStart(3, '0')}`,
+                clientName: document.getElementById('clientName').value,
+                woodType: document.getElementById('woodType').value,
+                pattern: document.getElementById('pattern').value,
+                installDate: document.getElementById('installDate').value,
+                squareFeet: document.getElementById('squareFeet').value,
+                finish: document.getElementById('finish').value,
+                care: document.getElementById('care').value,
+                warranty: document.getElementById('warranty').value
+            };
+            
+            floors.push(newFloor);
+            document.getElementById('floorCount').textContent = floors.length;
+            e.target.reset();
+            alert(`Floor record created! ID: ${newFloor.id}`);
+        }
+        
+        function renderFloorsList() {
+            const container = document.getElementById('floorsList');
+            container.innerHTML = floors.map(floor => `
+                <div class="floor-card">
+                    <h3>Floor ID: ${floor.id}</h3>
+                    <p style="color: #666; margin-bottom: 20px;">${floor.clientName} - ${floor.woodType}</p>
+                    <div class="floor-info">
+                        <div class="info-item"><span class="info-label">Pattern:</span> ${floor.pattern || 'N/A'}</div>
+                        <div class="info-item"><span class="info-label">Install Date:</span> ${floor.installDate || 'N/A'}</div>
+                        <div class="info-item"><span class="info-label">Square Feet:</span> ${floor.squareFeet || 'N/A'}</div>
+                        <div class="info-item"><span class="info-label">Finish:</span> ${floor.finish || 'N/A'}</div>
+                    </div>
+                    <div class="qr-display">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://odinsfountain.com/armour/floor-' + floor.id)}" alt="QR Code">
+                        <p style="margin-top: 10px; font-size: 0.85em; color: #888;">odinsfountain.com/armour/floor-${floor.id}</p>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn" onclick="downloadQR('${floor.id}')">⬇️ Download QR</button>
+                        <button class="btn btn-secondary" onclick="viewFloor('${floor.id}')">👁️ Preview</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderPreview() {
+            const floor = selectedFloor;
+            document.getElementById('previewContent').innerHTML = `
+                <div class="preview-detail">
+                    <div class="preview-label">Floor ID</div>
+                    <div class="preview-value">${floor.id}</div>
+                </div>
+                <div class="preview-detail">
+                    <div class="preview-label">Client</div>
+                    <div class="preview-value">${floor.clientName}</div>
+                </div>
+                <div class="preview-detail">
+                    <div class="preview-label">Wood Type</div>
+                    <div class="preview-value">${floor.woodType}</div>
+                </div>
+                ${floor.pattern ? `<div class="preview-detail">
+                    <div class="preview-label">Pattern</div>
+                    <div class="preview-value">${floor.pattern}</div>
+                </div>` : ''}
+                ${floor.installDate ? `<div class="preview-detail">
+                    <div class="preview-label">Installed</div>
+                    <div class="preview-value">${floor.installDate}</div>
+                </div>` : ''}
+                ${floor.squareFeet ? `<div class="preview-detail">
+                    <div class="preview-label">Square Footage</div>
+                    <div class="preview-value">${floor.squareFeet} sq ft</div>
+                </div>` : ''}
+                ${floor.finish ? `<div class="preview-detail">
+                    <div class="preview-label">Finish</div>
+                    <div class="preview-value">${floor.finish}</div>
+                </div>` : ''}
+                ${floor.care ? `<div class="preview-detail">
+                    <div class="preview-label">Care Instructions</div>
+                    <div class="preview-value">${floor.care}</div>
+                </div>` : ''}
+                <div class="preview-detail">
+                    <div class="preview-label">Warranty</div>
+                    <div class="preview-value">${floor.warranty}</div>
+                </div>
+            `;
+        }
+        
+        function downloadQR(floorId) {
+            const url = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent('https://odinsfountain.com/armour/floor-' + floorId)}`;
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `armour-floor-${floorId}-qr.png`;
+            link.click();
+        }
+        
+        function viewFloor(floorId) {
+            selectedFloor = floors.find(f => f.id === floorId);
+            switchTab('preview');
+            document.querySelectorAll('.tab-btn')[2].classList.add('active');
+        }
+        
+        // Initial render
+        renderFloorsList();
+        renderPreview();
+    </script>
+</body>
+</html>
